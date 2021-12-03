@@ -1,13 +1,13 @@
 (() => {
-	const throttle =  (type, name, obj)=> {
+	const throttle = (type, name, obj) => {
 		obj = obj || window;
 		let running = false;
-		const func = function () {
+		const func = function() {
 			if (running) {
 				return;
 			}
 			running = true;
-			requestAnimationFrame(function () {
+			requestAnimationFrame(function() {
 				obj.dispatchEvent(new CustomEvent(name));
 				running = false;
 			});
@@ -20,10 +20,10 @@
 
 ((obj) => {
 	obj = obj || window;
-	const animation = function (elem, prop, cb) {
+	obj.animation = function(elem, prop, cb) {
 		const count = prop.count;
 		let counter = 0
-		if(prop.start) {
+		if (prop.start) {
 			prop.start.forEach(item => {
 				elem.style[item[0]] = item[1]
 			})
@@ -56,7 +56,7 @@
 
 				requestAnimationFrame(rafAnimation);
 			} else {
-				if(prop.end) {
+				if (prop.end) {
 					prop.end.forEach(item => {
 						elem.style[item[0]] = item[1]
 					})
@@ -68,8 +68,6 @@
 		}
 		requestAnimationFrame(rafAnimation);
 	};
-
-	obj.animation = animation;
 })();
 
 
@@ -155,9 +153,8 @@ const init = () => {
 			let idVideo = search ? href.match(/(\?|&)v=([^&]+)/)[2] : href.match(/(\.be\/)([^&]+)/)[2];
 
 			if (idVideo.length === 0) return;
-			
-      e.preventDefault();
 
+			e.preventDefault();
 
 			animation(overlay, {
 					start: [['display', 'block']],
@@ -170,14 +167,14 @@ const init = () => {
 			<div id="videotube-modal-loading">Загрузка...</div>
 			<div id="videotube-modal-close">&#10006;</div>
 			<div id="videotube-modal-container">
-				<iframe src="http://youtube.com/embed/${idVideo}" 
-					frameborder=0
+				<iframe src="https://youtube.com/embed/${idVideo}?autoplay=1" 
+					frameborder="0"
 					id="videotube-modal" 
-					allowfullscreen="">
+					allowfullscreen
+					allow="autoplay">
 				</iframe>
 			</div>
 		`)
-
 
 			sizeVideo();
 			sizeContainer();
